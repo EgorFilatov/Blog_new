@@ -27,7 +27,7 @@ def category(request, pk):
 def parse(request):
     news_list = get_content()
     news_list.reverse()
-    latest_news = News.objects.filter(category_id=7).first().header
+    latest_news = News.objects.filter(category__category='Хабр').first().header
     i = 0
     while i < len(news_list):
         if news_list[-1 - i]['header'] == latest_news:
