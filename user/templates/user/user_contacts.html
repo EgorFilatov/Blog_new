@@ -1,0 +1,93 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load user_tags %}
+
+{% block header %}
+
+
+<!-- Page Header-->
+        <header class="masthead" style="background-image: url('{% static 'main/img/contact-bg.jpg' %}')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>Контакты</h1>
+                            <span class="subheading">Если у вас есть вопросы, свяжитесь со мной.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+{% endblock %}
+
+
+{% block main %}
+<!-- Main Content-->
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        {% get_user as admin_user %}
+                        <h2>Мой мобильный телефон:</h2>
+                        <a>{{ admin_user.Phone }}</a>
+                        <hr>
+                        <h2>Мой email:</h2>
+                        <a>{{ admin_user.email }}</a>
+                        <hr>
+                        <div class="my-5">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="text-center alert alert-{{ message.tags }}">
+                                        {{ message|safe }}
+                                    </div>
+                                {% endfor %}
+
+                            {% else %}
+                                <p>Заполните форму, чтобы отправить мне сообщение, и я свяжусь с вами как можно скорее!</p>
+                                 <form method="post" id="contactForm">
+                                {% csrf_token %}
+
+                                <div class="form-floating">
+                                    <input name="contact_name" class="form-control" id="contact_name" type="text" placeholder="Оставьте ваше имя..." data-sb-validations="required" />
+                                    <label for="contact_name">Имя</label>
+                                    {{ form.contact_name.errors }}
+                                </div>
+
+                                <div class="form-floating">
+                                    <input name="contact_email" class="form-control" id="contact_email" type="email" placeholder="Оставьте ваш email..." data-sb-validations="required,email" />
+                                    <label for="contact_email">Email</label>
+                                    {{ form.contact_email.errors }}
+                                </div>
+
+                                <div class="form-floating">
+                                    <input name="contact_phone_number" class="form-control" id="contact_phone_number" type="tel" placeholder="Оставьте ваш номер телефона..." data-sb-validations="required" />
+                                    <label for="contact_phone_number">Номер телефона</label>
+                                    {{ form.contact_phone_number.errors }}
+                                </div>
+
+                                <div class="form-floating">
+                                    <textarea name="message" class="form-control" id="message" placeholder="Оставьте ваше сообщение здесь..." style="height: 12rem" data-sb-validations="required"></textarea>
+                                    <label for="message">Сообщение</label>
+                                    {{ form.message.errors }}
+                                </div>
+
+                                <br />
+                                <label for="{{ form.captcha.id_for_label }}">Введите текст с картинки:</label>
+                                <br />
+                                <br />
+                                {{ form.captcha }}
+                                {{ form.captcha.errors }}
+                                <br />
+                                <br />
+
+                                <button class="btn btn-primary" id="submitButton" type="submit">Отправить</button>
+                            </form>
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+{% endblock %}

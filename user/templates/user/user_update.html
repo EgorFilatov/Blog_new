@@ -1,0 +1,85 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+{% block header %}
+<!-- Page Header-->
+        <header class="masthead" style="background-image: url('{% static 'main/img/user_update_bg.jpg' %}')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Обновите информацию о себе</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+{% endblock %}
+
+
+{% block main %}
+<div class="container-fluid">
+        <div class="row">
+           <div class="col-md-4">
+           </div>
+
+           <div class="col-md-4">
+                <form method="post" enctype="multipart/form-data" id="user_registration_form">
+                    {% csrf_token %}
+                    <label for="{{ form.first_name.id_for_label }}" class="form-label">Ваше имя:</label>
+                    {{ form.first_name }}
+                    {{ form.first_name.errors }}
+                    <br>
+
+                    <label for="{{ form.last_name.id_for_label }}" class="form-label">Ваша фамилия:</label>
+                    {{ form.last_name }}
+                    {{ form.last_name.errors }}
+                    <br>
+
+                    <label for="{{ form.username.id_for_label }}" class="form-label">Логин:</label>
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                    <br>
+
+                    <label for="{{ form.email.id_for_label }}" class="form-label">E-mail:</label>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                    <br>
+
+                    <label for="{{ form.about.id_for_label }}" class="form-label">Обо мне:</label>
+                    {{ form.about }}
+                    {{ form.about.errors }}
+                    <br>
+
+                    <label for="{{ form.photo.id_for_label }}" class="form-label">Фото:</label>
+                    {{ form.photo }}
+                    {{ form.photo.errors }}
+                    <br>
+
+                    <label for="{{ form.summary.id_for_label }}" class="form-label">Резюме:</label>
+                    {{ form.summary }}
+                    {{ form.summary.errors }}
+                    <br>
+
+                    <label for="{{ form.date_of_birth.id_for_label }}" class="form-label">Дата рождения:</label>
+                    {{ form.date_of_birth }}
+                    {{ form.date_of_birth.errors }}
+                    <br>
+
+                    <label for="{{ form.profession.id_for_label }}" class="form-label">Профессия:</label>
+                    {{ form.profession }}
+                    {{ form.profession.errors }}
+
+                    <br>
+                    <label for="{{ form.Phone.id_for_label }}" class="form-label">Телефон:</label>
+                    {{ form.Phone }}
+                    {{ form.Phone.errors }}
+                    <br>
+
+                    <p><button type="submit" class="btn btn-primary">Обновить</button></p>
+                </form>
+           </div>
+        </div>
+    </div>
+{% endblock %}

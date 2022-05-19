@@ -1,0 +1,75 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+{% block header %}
+<!-- Page Header-->
+        <header class="masthead" style="background-image: url('{% static 'main/img/home-bg.jpg' %}')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Регистрация на сайте</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+{% endblock %}
+
+
+{% block main %}
+    <div class="container-fluid">
+        <div class="row">
+           <div class="col-md-4">
+           </div>
+
+           <div class="col-md-4">
+
+               {% if messages %}
+                    {% for message in messages %}
+                       <div class="text-center alert alert-{{ message.tags }}">
+                           {{ message|safe }}
+                       </div>
+                   {% endfor %}
+               {% endif %}
+
+                <form method="post" enctype="multipart/form-data" id="user_registration_form">
+                    {% csrf_token %}
+
+                    <label for="{{ form.first_name.id_for_label }}" class="form-label">Ваше имя:</label>
+                    {{ form.first_name }}
+                    {{ form.first_name.errors }}
+                    <br>
+
+                    <label for="{{ form.last_name.id_for_label }}" class="form-label">Ваша фамилия:</label>
+                    {{ form.last_name }}
+                    {{ form.last_name.errors }}
+                    <br>
+
+                    <label for="{{ form.username.id_for_label }}" class="form-label">Логин:</label>
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                    <br>
+
+                    <label for="{{ form.email.id_for_label }}" class="form-label">E-mail:</label>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                    <br>
+
+                    <label for="{{ form.password1.id_for_label }}" class="form-label">Пароль:</label>
+                    <input type="password" class="form-control" id="id_password1" name="password1">
+                    {{ form.password1.errors }}
+                    <br>
+
+                    <label for="{{ form.password2.id_for_label }}" class="form-label">Повторите пароль:</label>
+                    <input type="password" class="form-control" id="id_password2" name="password2">
+                    {{ form.password2.errors }}
+                    <br>
+
+                    <p><button type="submit" class="btn btn-primary">Зарегистрироваться</button></p>
+                </form>
+           </div>
+        </div>
+    </div>
+{% endblock %}

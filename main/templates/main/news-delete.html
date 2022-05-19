@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+{% block header %}
+<!-- Page Header-->
+        <header class="masthead" style="background-image: url('{% static 'main/img/home-bg.jpg' %}')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Удаление новости</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+{% endblock %}
+
+
+{% block main %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <form method="post" enctype="multipart/form-data" id="news_delete_form">
+               {% csrf_token %}
+               <h2>Вы уверены, что хотите удалить статью?</h2>
+               <br>
+               <button type="submit" class="btn btn-primary">Удалить</button>
+           </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
