@@ -32,7 +32,9 @@ def parse(request):
     while i < len(news_list):
         if news_list[-1 - i]['header'] == latest_news:
             break
-        news = News(header=news_list[i]['header'], annotation=news_list[i]['annotation'], full_text=news_list[i]['full_text'], category=Categories.objects.get(pk=7), image_url=news_list[i]['image'])
+        #news = News(header=news_list[i]['header'], annotation=news_list[i]['annotation'], full_text=news_list[i]['full_text'], category=Categories.objects.get(pk=7), image_url=news_list[i]['image'])
+        news = News(header=news_list[i]['header'], annotation=news_list[i]['annotation'],)
+
         news.save()
         i = i + 1
     print(latest_news)
